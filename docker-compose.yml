@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+  database:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: admin999
+      POSTGRES_PASSWORD: nHxafTXqAHF4QbVkKheh
+      PGDATA: /data/postgres
+    volumes:
+       - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  crawling_data:
+    container_name: crawling_data
+    restart: on-failure
+    build: ./services/crawling_data
+    volumes:
+      - ./src:/app/src
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+    links:
+      - database
+
+volumes:
+  postgres:
+    driver: local
