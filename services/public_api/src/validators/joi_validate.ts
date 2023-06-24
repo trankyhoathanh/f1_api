@@ -13,4 +13,15 @@ export class RaceValidator {
       }
     };
   }
+
+  validateParams(schema: any) {
+    return async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        const val = await schema.validateAsync(req.params);
+        next();
+      } catch (error) {
+        res.status(400).json(error);
+      }
+    };
+  }
 }
