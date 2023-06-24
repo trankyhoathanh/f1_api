@@ -8,7 +8,7 @@
 Pull and install project to local / production
 
 ```sh
-git pull 
+git pull git@github.com:trankyhoathanh/f1_api.git
 cd to root folder f1_api
 docker compose up -d
 ```
