@@ -1,4 +1,4 @@
-import { getRepository, Between, SimpleConsoleLogger } from "typeorm";
+import { getRepository } from "typeorm";
 import { RaceResult } from '../db/entity/race_result';
 
 export const QueryRankingResults = async (req: any) => {
