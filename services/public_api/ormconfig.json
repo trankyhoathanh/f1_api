@@ -1,0 +1,22 @@
+{
+    "type": "postgres",
+    "host": "database",
+    "port": 5432,
+    "database": "postgres",
+    "username": "admin999",
+    "password": "nHxafTXqAHF4QbVkKheh",
+    "synchronize": true,
+    "logging": true,
+    "entities": [
+        "dist/js/db/entity/**/*{.ts,.js}",
+        "src/db/entity/**/*{.ts,.js}"
+    ],
+    "migrations": [
+        "dist/js/db/migration/**/*{.ts,.js}",
+        "src/db/migration/**/*{.ts,.js}"
+    ],
+    "cli": {
+        "entitiesDir": "src/db/entity",
+        "migrationsDir": "migration"
+    }
+}
