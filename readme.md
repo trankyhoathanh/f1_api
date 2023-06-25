@@ -298,18 +298,21 @@ http://localhost:3001/ranking/winner/Michael Schumacher?to_year=2005&from_year=2
     "list": [
         {
             "date_year": "2003",
-            "winner": "Michael Schumacher",
-            "times": "6"
+            "win": "Michael Schumacher",
+            "times": "6",
+            "rank": "1"
         },
         {
             "date_year": "2004",
-            "winner": "Michael Schumacher",
-            "times": "13"
+            "win": "Michael Schumacher",
+            "times": "13",
+            "rank": "1"
         },
         {
             "date_year": "2005",
-            "winner": "Michael Schumacher",
-            "times": "1"
+            "win": "Michael Schumacher",
+            "times": "1",
+            "rank": "3"
         }
     ]
 }
@@ -321,18 +324,21 @@ http://localhost:3001/ranking/car/McLaren Mercedes?to_year=2005&from_year=2003
     "list": [
         {
             "date_year": "2003",
-            "car": "McLaren Mercedes",
-            "times": "2"
+            "win": "McLaren Mercedes",
+            "times": "2",
+            "rank": "3"
         },
         {
             "date_year": "2004",
-            "car": "McLaren Mercedes",
-            "times": "1"
+            "win": "McLaren Mercedes",
+            "times": "1",
+            "rank": "2"
         },
         {
             "date_year": "2005",
-            "car": "McLaren Mercedes",
-            "times": "10"
+            "win": "McLaren Mercedes",
+            "times": "10",
+            "rank": "1"
         }
     ]
 }

@@ -6,38 +6,45 @@ export const QueryRankingMultipleResults = async (type: TypeQueryRanking, id: an
     const raceRepository = getRepository(RaceResult);
     try {
         let type_column = ``;
-        let where_conditions = ``;
+        const where_conditions_id = id;
         switch (Number(type)) {
             case TypeQueryRanking.Car:
-                req.grand_prix = id;
                 type_column = `car`
                 break;
             case TypeQueryRanking.Winner:
-                req.winner = id;
                 type_column = `winner`
                 break;
         }
-
-        if (id) {
-            where_conditions = `where ${type_column} = '${id}'`
-        }
         
+        let where_conditions_date = ``;
         if (req.hasOwnProperty('from_year')) {
-            where_conditions += ` and date >= '${req.from_year}-01-01'`;
+            where_conditions_date += `WHERE BOARD.date_year >= ${req.from_year}`;
         }
         
         if (req.hasOwnProperty('to_year')) {
-            where_conditions += ` and date <= '${req.to_year}-12-31'`;
+            where_conditions_date += ` AND BOARD.date_year <= ${req.to_year}`;
         }
 
         let query = `
-        SELECT  EXTRACT(YEAR from date) as date_year,
-                ${type_column},
-                count(${type_column}) as times
-        FROM    race_result
-        ${where_conditions} 
-        GROUP BY    date_year, ${type_column}
-        ORDER BY    date_year`;
+        SELECT  RANKED.*
+        FROM
+        (
+            SELECT	BOARD.date_year,
+                    BOARD.win,
+                    BOARD.times,
+                    DENSE_RANK() OVER(PARTITION BY BOARD.date_year ORDER BY BOARD.times DESC) rank
+            FROM (
+                SELECT  	EXTRACT(YEAR from date) as date_year,
+                            ${type_column} as win,
+                            count(${type_column}) as times
+                FROM    	race_result 
+                GROUP BY    date_year, win
+                ORDER BY    date_year
+            ) AS BOARD
+            ${where_conditions_date}
+        ) AS RANKED
+        WHERE RANKED.win = '${where_conditions_id}'
+        `
 
         return await raceRepository.query(query);
     } catch (error: any) {
