@@ -17,7 +17,8 @@ export const getRaceResults = async (year: number): Promise<isRaceResult[]> => {
         $('tr').each(function () {
             const grand_prix: string = $(this).find('td:nth-child(2) > a:nth-child(1)').text().trim() || '';
             const raceDate: string = $(this).find('td:nth-child(3)').text().trim() || '';
-            const winner: string = $(this).find('td:nth-child(4) > span:nth-child(2)').text().trim() || '';
+            let winner: string = $(this).find('td:nth-child(4) > span:nth-child(1)').text().trim() || '';
+            winner += ' ' + $(this).find('td:nth-child(4) > span:nth-child(2)').text().trim() || '';
             const car: string = $(this).find('td:nth-child(5)').text().trim() || '';
             const laps: number = parseInt($(this).find('td:nth-child(6)').text().trim()) || 0;
             const time: string = $(this).find('td:nth-child(7)').text().trim() || '';

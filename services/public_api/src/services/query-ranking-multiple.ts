@@ -33,7 +33,7 @@ export const QueryRankingMultipleResults = async (type: TypeQueryRanking, id: an
         let query = `
         SELECT  EXTRACT(YEAR from date) as date_year,
                 ${type_column},
-                count(${type_column}) as rank
+                count(${type_column}) as times
         FROM    race_result
         ${where_conditions} 
         GROUP BY    date_year, ${type_column}
