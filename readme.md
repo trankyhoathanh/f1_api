@@ -9,7 +9,7 @@ Pull and install project to local / production
 
 ```sh
 git clone git@github.com:trankyhoathanh/f1_api.git
-cd to root folder f1_api
+cd f1_api
 docker compose up -d
 ```
 
