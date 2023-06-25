@@ -198,7 +198,7 @@ Resonse succeed :
 |---|---|---|
 |/ranking?params|view details below |http://localhost:3001/ranking?year=2022&type=winner|
 |||http://localhost:3001/ranking?year=2022&type=car|
-|/ranking/:type/:id|Type : winner/car, id : name of winner/car|http://localhost:3001/ranking/winner/Schumacher?to_year=2005&from_year=2003|
+|/ranking/:type/:id|Type : winner/car, id : name of winner/car|http://localhost:3001/ranking/winner/Michael Schumacher?to_year=2005&from_year=2003|
 |||http://localhost:3001/ranking/car/McLaren%20Mercedes?to_year=2005&from_year=2003|
 
 # /ranking?params
@@ -210,11 +210,8 @@ year (number) (required)
 type  (string) (required) (accept winner / car)
 name (string)
 
-Example:
+Response Succeed Winner :
 http://localhost:3001/ranking?year=2022&type=winner
-http://localhost:3001/ranking?year=2022&type=car
-
-response succeed Winner :
 200 application/json; charset=utf-8
 {
     "list": [
@@ -241,7 +238,8 @@ response succeed Winner :
     ]
 }
 
-Response succeed Car : 
+Response succeed Car :
+http://localhost:3001/ranking?year=2022&type=car
 200 application/json; charset=utf-8
 {
     "list": [

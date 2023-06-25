@@ -23,7 +23,7 @@ export const QueryRankingResults = async (req: any) => {
                     break;
             }
             if (req.hasOwnProperty('name')) {
-                where_conditions += ` AND winner = '${req.name}'`
+                where_conditions += ` AND UPPER(winner) = UPPER('${req.name}')`
             }
         }
 
