@@ -174,12 +174,14 @@ Resonse succeed :
 
 |Endpoint|Params|Description|
 |---|---|---|
-|/race/ranking?params|view details below |http://localhost:3001/race/ranking?year=2022&type=winner|
-|||http://localhost:3001/race/ranking?year=2022&type=car|
+|/ranking?params|view details below |http://localhost:3001/ranking?year=2022&type=winner|
+|||http://localhost:3001/ranking?year=2022&type=car|
+|/ranking/:type/:id|Type : winner/car, id : name of winner/car|http://localhost:3001/ranking/winner/Schumacher?to_year=2005&from_year=2003|
+|||http://localhost:3001/ranking/car/McLaren%20Mercedes?to_year=2005&from_year=2003|
 
-# /race/ranking?params
+# /ranking?params
 ```sh
-GET /race/ranking?params
+GET /ranking?params
 
 Params structure : 
 year (number) (required)
@@ -187,8 +189,8 @@ type  (string) (required) (accept winner / car)
 name (string)
 
 Example:
-http://localhost:3001/race/ranking?year=2022&type=winner
-http://localhost:3001/race/ranking?year=2022&type=car
+http://localhost:3001/ranking?year=2022&type=winner
+http://localhost:3001/ranking?year=2022&type=car
 
 response succeed Winner :
 200 application/json; charset=utf-8
@@ -237,7 +239,7 @@ Response succeed Car :
 }
 
 Response failed :
-http://localhost:3001/race/ranking?year=2022
+http://localhost:3001/ranking?year=2022
 400 application/json; charset=utf-8
 {
     "_original": {
@@ -253,6 +255,111 @@ http://localhost:3001/race/ranking?year=2022
             "context": {
                 "label": "type",
                 "key": "type"
+            }
+        }
+    ]
+}
+```
+
+# /ranking/:type/:id?params
+```sh
+GET /ranking/:type/:id?params
+
+Params structure : 
+from_date (number)
+to_date (number)
+
+Example:
+http://localhost:3001/ranking/winner/Schumacher?to_year=2005&from_year=2003
+http://localhost:3001/ranking/car/McLaren Mercedes?to_year=2005&from_year=2003
+
+response succeed Winner :
+200 application/json; charset=utf-8
+{
+    "list": [
+        {
+            "date_year": "2003",
+            "winner": "Schumacher",
+            "rank": "8"
+        },
+        {
+            "date_year": "2004",
+            "winner": "Schumacher",
+            "rank": "13"
+        },
+        {
+            "date_year": "2005",
+            "winner": "Schumacher",
+            "rank": "1"
+        }
+    ]
+}
+
+Response succeed Car : 
+200 application/json; charset=utf-8
+{
+    "list": [
+        {
+            "date_year": "2003",
+            "car": "McLaren Mercedes",
+            "rank": "2"
+        },
+        {
+            "date_year": "2004",
+            "car": "McLaren Mercedes",
+            "rank": "1"
+        },
+        {
+            "date_year": "2005",
+            "car": "McLaren Mercedes",
+            "rank": "10"
+        }
+    ]
+}
+
+Response failed :
+http://localhost:3001/ranking/winner/Schumacher?to_year=x&from_year=2003
+400 application/json; charset=utf-8
+{
+    "_original": {
+        "to_year": "x",
+        "from_year": "2003"
+    },
+    "details": [
+        {
+            "message": "\"to_year\" must be a number",
+            "path": [
+                "to_year"
+            ],
+            "type": "number.base",
+            "context": {
+                "label": "to_year",
+                "value": "x",
+                "key": "to_year"
+            }
+        }
+    ]
+}
+
+Response failed :
+http://localhost:3001/ranking/car/Mercedes?to_year=x&from_year=2003
+400 application/json; charset=utf-8
+{
+    "_original": {
+        "to_year": "x",
+        "from_year": "2003"
+    },
+    "details": [
+        {
+            "message": "\"to_year\" must be a number",
+            "path": [
+                "to_year"
+            ],
+            "type": "number.base",
+            "context": {
+                "label": "to_year",
+                "value": "x",
+                "key": "to_year"
             }
         }
     ]

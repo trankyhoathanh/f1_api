@@ -8,8 +8,9 @@ import { createConnection } from 'typeorm';
 import { QueryRaceResults }  from './services/query-race-results';
 import { QueryRankingResults }  from './services/query-ranking-results';
 import { QueryRaceMultipleResults }  from './services/query-race-multiple';
+import { QueryRankingMultipleResults }  from './services/query-ranking-multiple';
 
-import { TypeQuery } from './constant/query_multiple';
+import { TypeQuery, TypeQueryRanking } from './constant/query_multiple';
 
 import { RaceValidator } from './validators/joi_validate';
 import { raceSchema } from './validators/race_schema';
@@ -19,6 +20,7 @@ import { carSchema } from './validators/car';
 import { lapsSchema } from './validators/laps';
 import { yearSchema } from './validators/year';
 import { rankingSchema } from './validators/ranking_schema';
+import { rankingMultipleSchema } from './validators/ranking_multiple_schema';
 
 const raceValidator = new RaceValidator();
 
@@ -28,7 +30,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(compression());
 
-app.get('/race/ranking/', raceValidator.validateQuery(rankingSchema), async (req: Request, res) => {
+app.get('/ranking/car/:id', raceValidator.validateQuery(rankingMultipleSchema), async (req: Request, res) => {
+  const { params, query } = req;
+  const response = await QueryRankingMultipleResults(TypeQueryRanking.Car, params.id, query);
+  res.json({ list: response })
+})
+
+app.get('/ranking/winner/:id', raceValidator.validateQuery(rankingMultipleSchema), async (req: Request, res) => {
+  const { params, query } = req;
+  const response = await QueryRankingMultipleResults(TypeQueryRanking.Winner, params.id, query);
+  res.json({ list: response })
+})
+
+app.get('/ranking/', raceValidator.validateQuery(rankingSchema), async (req: Request, res) => {
   const { query } = req;
   const response = await QueryRankingResults(query);
   res.json({ list: response })
