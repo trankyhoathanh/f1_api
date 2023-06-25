@@ -43,7 +43,7 @@ export const QueryRankingMultipleResults = async (type: TypeQueryRanking, id: an
             ) AS BOARD
             ${where_conditions_date}
         ) AS RANKED
-        WHERE RANKED.win = '${where_conditions_id}'
+        WHERE UPPER(RANKED.win) = UPPER('${where_conditions_id}')
         `
 
         return await raceRepository.query(query);
