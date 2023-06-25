@@ -36,7 +36,7 @@ After crawling data, you will see at
 GET /race/winner/:id
 
 Example:
-http://localhost:3001/race?grand_prix=Australia&car=Ferrari&winner=Schumacher
+http://localhost:3001/race/winner/Schumacher?grand_prix=Malaysia&year=2004
 
 Resonse succeed : 
 200 application/json; charset=utf-8
@@ -280,17 +280,17 @@ response succeed Winner :
         {
             "date_year": "2003",
             "winner": "Schumacher",
-            "rank": "8"
+            "times": "8"
         },
         {
             "date_year": "2004",
             "winner": "Schumacher",
-            "rank": "13"
+            "times": "13"
         },
         {
             "date_year": "2005",
             "winner": "Schumacher",
-            "rank": "1"
+            "times": "1"
         }
     ]
 }
@@ -302,17 +302,17 @@ Response succeed Car :
         {
             "date_year": "2003",
             "car": "McLaren Mercedes",
-            "rank": "2"
+            "times": "2"
         },
         {
             "date_year": "2004",
             "car": "McLaren Mercedes",
-            "rank": "1"
+            "times": "1"
         },
         {
             "date_year": "2005",
             "car": "McLaren Mercedes",
-            "rank": "10"
+            "times": "10"
         }
     ]
 }
