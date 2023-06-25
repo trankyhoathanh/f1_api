@@ -5,3 +5,8 @@ export enum TypeQuery {
     Laps = 3,
     Year = 4,
 };
+
+export enum TypeQueryRanking {
+    Car = 0,
+    Winner = 1,
+};
