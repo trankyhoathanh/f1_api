@@ -21,14 +21,24 @@ import { lapsSchema } from './validators/laps';
 import { yearSchema } from './validators/year';
 import { rankingSchema } from './validators/ranking_schema';
 import { rankingMultipleSchema } from './validators/ranking_multiple_schema';
+import { RateLimitRule, rateLimitSchema } from './system/rate_limit';
 
 const raceValidator = new RaceValidator();
+const rate = new rateLimitSchema();
 
 const app = express();
 app.use(methodOverride());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(compression());
+
+const HEART_RATE_LIMIT_RULE: RateLimitRule = {
+  endpoint: '/',
+  rate_limit: {
+    time: 1,
+    limit: 1
+  }
+}
 
 app.get('/ranking/car/:id', raceValidator.validateQuery(rankingMultipleSchema), async (req: Request, res) => {
   const { params, query } = req;
@@ -84,7 +94,7 @@ app.get('/race', raceValidator.validateQuery(raceSchema), async (req: Request, r
   res.json({ list: response })
 })
 
-app.get( '/', ( req, res ) => {
+app.get( '/', rate.limit(HEART_RATE_LIMIT_RULE), async (req, res) => {
   res.json({ text: 'Hearth beat' })
 });
 
