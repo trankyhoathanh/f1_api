@@ -1,6 +1,14 @@
 version: '2'
 
 services:
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning
+    volumes: 
+      - cache:/data
   database:
     container_name: postgres_container
     image: postgres
@@ -37,9 +45,12 @@ services:
       - "3001:3000"
     depends_on:
       - database
+      - cache
     links:
       - database
 
 volumes:
   postgres:
+    driver: local
+  cache:
     driver: local
