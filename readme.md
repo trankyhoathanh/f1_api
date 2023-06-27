@@ -483,3 +483,31 @@ http://localhost:3001/race?grand_prix=Australia&car=Ferrari&winner=Michael Schum
     ]
 }
 ```
+
+|Endpoint|Params|Description|
+|---|---|---|
+|/|   |http://localhost:3001/|
+
+# /
+```sh
+GET /
+
+Check Rate Limit
+
+Example:
+http://localhost:3001/
+
+Response succeed : 
+200 application/json; charset=utf-8
+{
+    "text": "Hearth beat"
+}
+
+Response failed :
+http://localhost:3001/
+429 application/json; charset=utf-8
+Too Many Requests
+{
+    "message": "to much requests"
+}
+```
