@@ -28,7 +28,7 @@ export class rateLimitSchema {
 
             if (request > rate_limit.limit) {
                 return res.status(429).send({
-                    message: 'to much requests'
+                    message: 'too much requests'
                 });
             }
 
