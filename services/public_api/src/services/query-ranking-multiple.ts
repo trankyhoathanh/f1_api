@@ -1,9 +1,8 @@
-import { getRepository, Between } from "typeorm";
 import { TypeQueryRanking } from '../constant/query_multiple';
 import { RaceResult } from '../db/entity/race_result';
+import { AppDataSource } from "../db/data-source";
 
 export const QueryRankingMultipleResults = async (type: TypeQueryRanking, id: any, req: any) => {
-    const raceRepository = getRepository(RaceResult);
     try {
         let type_column = ``;
         const where_conditions_id = id;
@@ -46,7 +45,7 @@ export const QueryRankingMultipleResults = async (type: TypeQueryRanking, id: an
         WHERE UPPER(RANKED.win) = UPPER('${where_conditions_id}')
         `
 
-        return await raceRepository.query(query);
+        return await AppDataSource.getRepository(RaceResult).query(query);
     } catch (error: any) {
         console.log(error);
         return [];
