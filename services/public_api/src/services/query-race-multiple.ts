@@ -1,10 +1,10 @@
-import { getRepository, Between } from "typeorm";
+import { Between } from "typeorm";
 import { TypeQuery } from '../constant/query_multiple';
 import { RaceResult } from '../db/entity/race_result';
 import { DateUtils } from '../utils/date_utils';
+import { AppDataSource } from "../db/data-source";
 
 export const QueryRaceMultipleResults = async (type: TypeQuery, id: any, req: any) => {
-    const raceRepository = getRepository(RaceResult);
     try {
         switch (Number(type)) {
             case TypeQuery.GrandPrix:
@@ -34,7 +34,7 @@ export const QueryRaceMultipleResults = async (type: TypeQuery, id: any, req: an
             req.laps = parseInt(req.laps) || 0;
         }
 
-        return await raceRepository.find({ where: req });
+        return await AppDataSource.getRepository(RaceResult).find({ where: req });
     } catch (error: any) {
         console.log(error);
         return [];

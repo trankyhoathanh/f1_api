@@ -3,7 +3,9 @@ import { Request } from 'express'
 import methodOverride from 'method-override';
 import compression from 'compression';
 import bodyParser from 'body-parser';
-import { createConnection } from 'typeorm';
+
+import dotenv from 'dotenv';
+dotenv.config();
 
 import { QueryRaceResults }  from './services/query-race-results';
 import { QueryRankingResults }  from './services/query-ranking-results';
@@ -22,6 +24,7 @@ import { yearSchema } from './validators/year';
 import { rankingSchema } from './validators/ranking_schema';
 import { rankingMultipleSchema } from './validators/ranking_multiple_schema';
 import { RateLimitRule, rateLimitSchema } from './system/rate_limit';
+import { AppDataSource } from './db/data-source';
 
 const raceValidator = new RaceValidator();
 const rate = new rateLimitSchema();
@@ -100,7 +103,7 @@ app.get( '/', rate.limit(HEART_RATE_LIMIT_RULE), async (req, res) => {
 
 app.listen(3000, async () => {
   try {
-    await createConnection();
+    await AppDataSource.initialize();
     console.log('Connect database success !');
   } catch (error) {
     console.log(`Connect database error !`);

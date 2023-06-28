@@ -1,8 +1,7 @@
-import { getRepository } from "typeorm";
 import { RaceResult } from '../db/entity/race_result';
+import { AppDataSource } from "../db/data-source";
 
 export const QueryRankingResults = async (req: any) => {
-    const raceRepository = getRepository(RaceResult);
     try {
         let where_conditions = ``;
         let condition = ``;
@@ -35,7 +34,7 @@ export const QueryRankingResults = async (req: any) => {
         GROUP BY    ${condition} 
         ORDER BY    count(${condition}) DESC`;
 
-        return await raceRepository.query(query);
+        return await AppDataSource.getRepository(RaceResult).query(query);
     } catch (error: any) {
         console.log(error);
         return [];

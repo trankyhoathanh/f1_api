@@ -27,6 +27,7 @@ services:
     container_name: crawling_data
     restart: on-failure
     build: ./services/crawling_data
+    env_file: ./env/.env
     volumes:
       - ./src:/app/src
     ports:
@@ -40,6 +41,7 @@ services:
     container_name: public_api
     restart: on-failure
     build: ./services/public_api
+    env_file: ./env/.env
     volumes:
       - ./src:/app/src
     ports:

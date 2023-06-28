@@ -3,8 +3,11 @@ import methodOverride from 'method-override';
 import compression from 'compression';
 import bodyParser from 'body-parser';
 
-import { createConnection } from 'typeorm';
+import dotenv from 'dotenv';
+dotenv.config();
+
 import { autoGetRaceResults }  from './services/auto-race-results';
+import { AppDataSource } from './db/data-source';
 
 const app = express();
 app.use(methodOverride());
@@ -33,7 +36,7 @@ app.get( '/', ( req, res ) => {
 
 app.listen(3000, async () => {
   try {
-    await createConnection();
+    await AppDataSource.initialize();
     console.log('Connect database success !');
   } catch (error) {
     console.log(`Connect database error !`);

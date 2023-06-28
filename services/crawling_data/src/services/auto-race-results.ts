@@ -1,10 +1,9 @@
-import { getManager } from "typeorm";
+import { AppDataSource } from '../db/data-source';
 import { getRaceResults } from './race-results';
 import { RaceResult } from '../db/entity/race_result';
 
 export const autoGetRaceResults = async () => {
     try {
-        const entityManager = getManager();
         for (let i = 2000; i < 2024; i++)
         {
             let result = await getRaceResults(i);
@@ -21,7 +20,7 @@ export const autoGetRaceResults = async () => {
                 laps: item.laps,
                 time: item.time,
                 })
-                await entityManager.save(RaceResult, new_race_result);
+                await AppDataSource.manager.save(RaceResult, new_race_result);
                 console.log('Saved ---');
             }
         }
