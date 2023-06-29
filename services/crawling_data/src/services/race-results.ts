@@ -6,7 +6,7 @@ import { isRaceResult } from '../model/types';
 
 export const getRaceResults = async (year: number): Promise<isRaceResult[]> => {
     try {
-        let raceResults: isRaceResult[] = [];
+        const raceResults: isRaceResult[] = [];
 
         const link = `${dynamicLinks.rootLink}/${year}/${dynamicLinks.results}`
         console.log(link);
@@ -36,6 +36,7 @@ export const getRaceResults = async (year: number): Promise<isRaceResult[]> => {
             }
         });
         return raceResults;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         throw new Error(error);
     }

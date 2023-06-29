@@ -21,7 +21,7 @@ export class RaceResult {
 
     @Column({ nullable: false })
     car: string;
-    
+
     @Column({ nullable: false })
     laps: number;
 

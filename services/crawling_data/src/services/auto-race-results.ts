@@ -11,7 +11,7 @@ export const autoGetRaceResults = async () => {
     
             console.log(result);
     
-            for (let item of result) {
+            for (const item of result) {
                 console.log(item);
                 const new_race_result = new RaceResult({
                     grand_prix: item.grand_prix,
@@ -29,6 +29,7 @@ export const autoGetRaceResults = async () => {
         }
 
         return 'Succeed';
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         throw new Error(error);
     }
