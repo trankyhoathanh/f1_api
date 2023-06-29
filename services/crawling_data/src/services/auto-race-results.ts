@@ -6,23 +6,26 @@ export const autoGetRaceResults = async () => {
     try {
         for (let i = 2000; i < 2024; i++)
         {
-            let result = await getRaceResults(i);
+            const result = await getRaceResults(i);
+            const result_upset:RaceResult[] = [];
     
             console.log(result);
     
             for (let item of result) {
                 console.log(item);
                 const new_race_result = new RaceResult({
-                grand_prix: item.grand_prix,
-                date: item.date,
-                winner: item.winner,
-                car: item.car,
-                laps: item.laps,
-                time: item.time,
+                    grand_prix: item.grand_prix,
+                    date: item.date,
+                    winner: item.winner,
+                    car: item.car,
+                    laps: item.laps,
+                    time: item.time,
                 })
-                await AppDataSource.manager.save(RaceResult, new_race_result);
-                console.log('Saved ---');
+                result_upset.push(new_race_result);
             }
+
+            await AppDataSource.getRepository(RaceResult).upsert(result_upset, ['grand_prix', 'date', 'winner', 'car', 'laps']);
+            console.log('Saved all ---');
         }
 
         return 'Succeed';
