@@ -1,6 +1,7 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Tree, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from 'typeorm';
 
 @Entity('race_result')
+@Unique('constraint_unique', ['grand_prix', 'date', 'winner', 'car', 'laps'])
 export class RaceResult {
     constructor(data?: Partial<RaceResult>) {
         Object.assign(this, data)
