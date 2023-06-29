@@ -2,6 +2,7 @@ import { TypeQueryRanking } from '../constant/query_multiple';
 import { RaceResult } from '../db/entity/race_result';
 import { AppDataSource } from "../db/data-source";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const QueryRankingMultipleResults = async (type: TypeQueryRanking, id: any, req: any) => {
     try {
         let type_column = ``;
@@ -16,15 +17,17 @@ export const QueryRankingMultipleResults = async (type: TypeQueryRanking, id: an
         }
         
         let where_conditions_date = ``;
+        // eslint-disable-next-line no-prototype-builtins
         if (req.hasOwnProperty('from_year')) {
             where_conditions_date += `WHERE BOARD.date_year >= ${req.from_year}`;
         }
         
+        // eslint-disable-next-line no-prototype-builtins
         if (req.hasOwnProperty('to_year')) {
             where_conditions_date += ` AND BOARD.date_year <= ${req.to_year}`;
         }
 
-        let query = `
+        const query = `
         SELECT  RANKED.*
         FROM
         (
@@ -46,6 +49,7 @@ export const QueryRankingMultipleResults = async (type: TypeQueryRanking, id: an
         `
 
         return await AppDataSource.getRepository(RaceResult).query(query);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         console.log(error);
         return [];

@@ -1,7 +1,7 @@
 import {MigrationInterface, QueryRunner} from 'typeorm';
 
 export class f1Migration20230624000000 implements MigrationInterface {      
-
+   // eslint-disable-next-line @typescript-eslint/no-explicit-any
    public async up(queryRunner: QueryRunner): Promise<any> { 
     await queryRunner.query(`
         CREATE TABLE IF NOT EXISTS race_result (
@@ -17,6 +17,6 @@ export class f1Migration20230624000000 implements MigrationInterface {
         )`); 
    } 
    
-   public async down(queryRunner: QueryRunner): Promise<any> { 
-   } 
+   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any, @typescript-eslint/no-empty-function
+   public async down(queryRunner: QueryRunner): Promise<any> { } 
 }

@@ -11,6 +11,7 @@ export interface RateLimitRule {
 }
 
 export class rateLimitSchema {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     constructor() { }
   
     limit(rule: RateLimitRule) {
