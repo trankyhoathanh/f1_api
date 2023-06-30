@@ -1,39 +1,39 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from 'express'
 
-import { StartRedis } from './redis';
+import { StartRedis } from './redis'
 
 export interface RateLimitRule {
-    endpoint: string,
-    rate_limit: {
-        time: number,
-        limit: number
-    }
+  endpoint: string
+  rate_limit: {
+    time: number
+    limit: number
+  }
 }
 
 export class rateLimitSchema {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    constructor() { }
-  
-    limit(rule: RateLimitRule) {
-        const { endpoint, rate_limit } = rule;
-        return async (req: Request, res: Response, next: NextFunction) => {
-            const ip = req.ip;
-            const redis_id = `${endpoint}_${ip}`;
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  constructor() {}
 
-            const redis_client = await StartRedis();
-            const request = await redis_client.incr(redis_id);
+  limit(rule: RateLimitRule) {
+    const { endpoint, rate_limit } = rule
+    return async (req: Request, res: Response, next: NextFunction) => {
+      const ip = req.ip
+      const redis_id = `${endpoint}_${ip}`
 
-            if (request === 1) {
-                await redis_client.expire(redis_id, rate_limit.time);
-            }
+      const redis_client = await StartRedis()
+      const request = await redis_client.incr(redis_id)
 
-            if (request > rate_limit.limit) {
-                return res.status(429).send({
-                    message: 'too much requests'
-                });
-            }
+      if (request === 1) {
+        await redis_client.expire(redis_id, rate_limit.time)
+      }
 
-            next();
-        };
+      if (request > rate_limit.limit) {
+        return res.status(429).send({
+          message: 'too much requests'
+        })
+      }
+
+      next()
     }
+  }
 }
