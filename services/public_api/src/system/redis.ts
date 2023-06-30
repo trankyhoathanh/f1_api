@@ -1,23 +1,23 @@
-import { createClient, RedisClientType } from 'redis';
+import { createClient, RedisClientType } from 'redis'
 
 const redis_config = {
-    host: 'cache',
-    port: 6379
+  host: 'cache',
+  port: 6379
 }
 
 export const StartRedis = async () => {
-    const redis: RedisClientType = createClient({
-        socket: {
-            host: redis_config.host,
-            port: redis_config.port
-        }
-    });
+  const redis: RedisClientType = createClient({
+    socket: {
+      host: redis_config.host,
+      port: redis_config.port
+    }
+  })
 
-    await redis.connect().then(() => {
-        console.log('Connected redis');
-    });
+  await redis.connect().then(() => {
+    console.log('Connected redis')
+  })
 
-    return redis;
+  return redis
 }
 
-export default StartRedis;
+export default StartRedis
