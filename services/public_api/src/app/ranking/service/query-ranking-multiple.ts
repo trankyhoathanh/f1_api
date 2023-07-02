@@ -1,6 +1,6 @@
-import { TypeQueryRanking } from '../constant/query_multiple'
-import { RaceResult } from '../db/entity/race_result'
-import { AppDataSource } from '../db/data-source'
+import { TypeQueryRanking } from '../../../constant/query_multiple'
+import { RaceResult } from '../../../db/entity/race_result'
+import { AppDataSource } from '../../../db/data-source'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const QueryRankingMultipleResults = async (type: TypeQueryRanking, id: any, req: any) => {
