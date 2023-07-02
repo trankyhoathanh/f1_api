@@ -13,23 +13,23 @@ import raceRouter from './app/race/route'
 import rankRouter from './app/ranking/route'
 
 export class ApplicationExpress {
-  public app: express.Application;
+  public app: express.Application
   public config: {
     port: number
-  };
+  }
 
   constructor() {
-    this.app = express();
+    this.app = express()
     this.config = {
       port: 3000
     }
   }
 
   private async InitExpress(): Promise<void> {
-    this.app.use(methodOverride());
-    this.app.use(bodyParser.urlencoded({ extended: true }));
-    this.app.use(bodyParser.json());
-    this.app.use(compression());
+    this.app.use(methodOverride())
+    this.app.use(bodyParser.urlencoded({ extended: true }))
+    this.app.use(bodyParser.json())
+    this.app.use(compression())
   }
 
   private async InitRoute() {
@@ -40,19 +40,17 @@ export class ApplicationExpress {
 
   private async InitDb() {
     try {
-      await AppDataSource.initialize();
+      await AppDataSource.initialize()
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
 
   public async ExecuterApp(): Promise<void> {
-    await this.InitExpress();
-    await this.InitDb();
-    await this.InitRoute();
+    await this.InitExpress()
+    await this.InitDb()
+    await this.InitRoute()
 
-    this.app.listen(this.config.port, () => 
-      console.log(`Server listening on port ${this.config.port}`)
-    );
+    this.app.listen(this.config.port, () => console.log(`Server listening on port ${this.config.port}`))
   }
 }

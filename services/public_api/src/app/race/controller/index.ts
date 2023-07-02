@@ -38,3 +38,9 @@ export const race = async (req: Request, res: Response) => {
   const response = await QueryRaceResults(query)
   res.json({ list: response })
 }
+
+export const race_default = async (req: Request, res: Response) => {
+  const { query } = req
+  const response = await QueryRaceResults(query)
+  res.json({ list: response })
+}

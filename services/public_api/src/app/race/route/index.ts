@@ -11,6 +11,6 @@ router.get('/race/winner/:id', raceValidator.validateParams(winnerSchema), winne
 router.get('/race/car/:id', raceValidator.validateParams(carSchema), car)
 router.get('/race/laps/:id', raceValidator.validateParams(lapsSchema), laps)
 router.get('/race/year/:id', raceValidator.validateParams(yearSchema), year)
-router.get('/race/race/:id', raceValidator.validateParams(raceSchema), race)
+router.get('/race', raceValidator.validateQuery(raceSchema), race)
 
 export default router
