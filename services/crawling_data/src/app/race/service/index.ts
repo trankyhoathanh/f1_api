@@ -1,6 +1,6 @@
-import { AppDataSource } from '../db/data-source'
+import { AppDataSource } from '../../../db/data-source'
 import { getRaceResults } from './race-results'
-import { RaceResult } from '../db/entity/race_result'
+import { RaceResult } from '../../../db/entity/race_result'
 
 export const autoGetRaceResults = async () => {
   try {

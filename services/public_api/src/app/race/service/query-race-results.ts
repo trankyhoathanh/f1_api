@@ -1,7 +1,7 @@
 import { Between } from 'typeorm'
-import { RaceResult } from '../db/entity/race_result'
-import { DateUtils } from '../utils/date_utils'
-import { AppDataSource } from '../db/data-source'
+import { RaceResult } from '../../../db/entity/race_result'
+import { DateUtils } from '../../../utils/date_utils'
+import { AppDataSource } from '../../../db/data-source'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const QueryRaceResults = async (req: any) => {

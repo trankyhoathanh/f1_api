@@ -14,7 +14,7 @@
       "strictPropertyInitialization": false,
       "noImplicitAny": true,
     },
-    "include": ["src/**/*.ts"],
-    "exclude": ["node_modules", ".vscode"],
+    "include": ["src/**/*.ts", "src/*.ts"],
+    "exclude": ["node_modules", ".vscode"]
 }
   
