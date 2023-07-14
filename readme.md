@@ -15,28 +15,28 @@ docker compose up -d
 
 ## Crawling data
 ```sh
-run at browser http://localhost:3000/race-result
+run at browser http://localhost:5999/race-result
 waiting a minutes...
 
 After crawling data, you will see at 
 {"status":200,"data":"Get data from race result succeed !"}
 ```
 
-## Public API (https://localhost:3001/)
+## Public API (https://localhost:6001/)
 |Endpoint|Params|Description|
 |---|---|---|
-|/race/winner/:id|id : name of winner   |http://localhost:3001/race/winner/Michael%20Schumacher?grand_prix=Malaysia&year=2004|
-|/race/car/:id|id : name of car   |http://localhost:3001/race/car/Ferrari?year=2022|
-|/race/grand_prix/:id|id : name of grand prix   |http://localhost:3001/race/grand_prix/Bahrain?year=2022|
-|/race/laps/:id|id : number of laps   |http://localhost:3001/race/laps/60?year=2000|
-|/race/year/:id|id : year number|http://localhost:3001/race/year/2000?grand_prix=Australia|
+|/race/winner/:id|id : name of winner   |http://localhost:6001/race/winner/Michael%20Schumacher?grand_prix=Malaysia&year=2004|
+|/race/car/:id|id : name of car   |http://localhost:6001/race/car/Ferrari?year=2022|
+|/race/grand_prix/:id|id : name of grand prix   |http://localhost:6001/race/grand_prix/Bahrain?year=2022|
+|/race/laps/:id|id : number of laps   |http://localhost:6001/race/laps/60?year=2000|
+|/race/year/:id|id : year number|http://localhost:6001/race/year/2000?grand_prix=Australia|
 
 # /race/winner/:id
 ```sh
 GET /race/winner/:id
 
 Example:
-http://localhost:3001/race/winner/Michael%20Schumacher?grand_prix=Malaysia&year=2004
+http://localhost:6001/race/winner/Michael%20Schumacher?grand_prix=Malaysia&year=2004
 
 Resonse succeed : 
 200 application/json; charset=utf-8
@@ -62,7 +62,7 @@ Resonse succeed :
 GET /race/car/:id
 
 Example:
-http://localhost:3001/race/car/Ferrari?year=2022
+http://localhost:6001/race/car/Ferrari?year=2022
 
 Resonse succeed : 
 200 application/json; charset=utf-8
@@ -121,7 +121,7 @@ Resonse succeed :
 GET /race/grand_prix/:id
 
 Example:
-http://localhost:3001/race/grand_prix/Bahrain?year=2022
+http://localhost:6001/race/grand_prix/Bahrain?year=2022
 
 Resonse succeed : 
 200 application/json; charset=utf-8
@@ -147,7 +147,7 @@ Resonse succeed :
 GET /race/laps/:id
 
 Example:
-http://localhost:3001/race/laps/60?year=2000
+http://localhost:6001/race/laps/60?year=2000
 
 Resonse succeed : 
 200 application/json; charset=utf-8
@@ -173,7 +173,7 @@ Resonse succeed :
 GET /race/year/:id
 
 Example:
-http://localhost:3001/race/year/2000?grand_prix=Australia
+http://localhost:6001/race/year/2000?grand_prix=Australia
 
 Resonse succeed : 
 200 application/json; charset=utf-8
@@ -196,10 +196,10 @@ Resonse succeed :
 
 |Endpoint|Params|Description|
 |---|---|---|
-|/ranking?params|view details below |http://localhost:3001/ranking?year=2022&type=winner|
-|||http://localhost:3001/ranking?year=2022&type=car|
-|/ranking/:type/:id|Type : winner/car, id : name of winner/car|http://localhost:3001/ranking/winner/Michael Schumacher?to_year=2005&from_year=2003|
-|||http://localhost:3001/ranking/car/McLaren%20Mercedes?to_year=2005&from_year=2003|
+|/ranking?params|view details below |http://localhost:6001/ranking?year=2022&type=winner|
+|||http://localhost:6001/ranking?year=2022&type=car|
+|/ranking/:type/:id|Type : winner/car, id : name of winner/car|http://localhost:6001/ranking/winner/Michael Schumacher?to_year=2005&from_year=2003|
+|||http://localhost:6001/ranking/car/McLaren%20Mercedes?to_year=2005&from_year=2003|
 
 # /ranking?params
 ```sh
@@ -211,7 +211,7 @@ type  (string) (required) (accept winner / car)
 name (string)
 
 Response Succeed Winner :
-http://localhost:3001/ranking?year=2022&type=winner
+http://localhost:6001/ranking?year=2022&type=winner
 200 application/json; charset=utf-8
 {
     "list": [
@@ -239,7 +239,7 @@ http://localhost:3001/ranking?year=2022&type=winner
 }
 
 Response succeed Car :
-http://localhost:3001/ranking?year=2022&type=car
+http://localhost:6001/ranking?year=2022&type=car
 200 application/json; charset=utf-8
 {
     "list": [
@@ -259,7 +259,7 @@ http://localhost:3001/ranking?year=2022&type=car
 }
 
 Response failed :
-http://localhost:3001/ranking?year=2022
+http://localhost:6001/ranking?year=2022
 400 application/json; charset=utf-8
 {
     "_original": {
@@ -290,7 +290,7 @@ from_date (number)
 to_date (number)
 
 Response succeed Winner :
-http://localhost:3001/ranking/winner/Michael Schumacher?to_year=2005&from_year=2003
+http://localhost:6001/ranking/winner/Michael Schumacher?to_year=2005&from_year=2003
 200 application/json; charset=utf-8
 {
     "list": [
@@ -316,7 +316,7 @@ http://localhost:3001/ranking/winner/Michael Schumacher?to_year=2005&from_year=2
 }
 
 Response succeed Car : 
-http://localhost:3001/ranking/car/McLaren Mercedes?to_year=2005&from_year=2003
+http://localhost:6001/ranking/car/McLaren Mercedes?to_year=2005&from_year=2003
 200 application/json; charset=utf-8
 {
     "list": [
@@ -342,7 +342,7 @@ http://localhost:3001/ranking/car/McLaren Mercedes?to_year=2005&from_year=2003
 }
 
 Response failed :
-http://localhost:3001/ranking/winner/Michael Schumacher?to_year=x&from_year=2003
+http://localhost:6001/ranking/winner/Michael Schumacher?to_year=x&from_year=2003
 400 application/json; charset=utf-8
 {
     "_original": {
@@ -366,7 +366,7 @@ http://localhost:3001/ranking/winner/Michael Schumacher?to_year=x&from_year=2003
 }
 
 Response failed :
-http://localhost:3001/ranking/car/Mercedes?to_year=x&from_year=2003
+http://localhost:6001/ranking/car/Mercedes?to_year=x&from_year=2003
 400 application/json; charset=utf-8
 {
     "_original": {
@@ -392,7 +392,7 @@ http://localhost:3001/ranking/car/Mercedes?to_year=x&from_year=2003
 
 |Endpoint|Params|Description|
 |---|---|---|
-|/race?params|view details below |http://localhost:3001/race?grand_prix=Australia&car=Ferrari&winner=Michael Schumacher|
+|/race?params|view details below |http://localhost:6001/race?grand_prix=Australia&car=Ferrari&winner=Michael Schumacher|
 # /race?params
 ```sh
 GET /race?params
@@ -404,7 +404,7 @@ car (string)
 laps (number)
 
 Example:
-http://localhost:3001/race?grand_prix=Australia&car=Ferrari&winner=Michael Schumacher
+http://localhost:6001/race?grand_prix=Australia&car=Ferrari&winner=Michael Schumacher
 
 Response succeed : 
 200 application/json; charset=utf-8
@@ -458,7 +458,7 @@ Response succeed :
 }
 
 Response failed :
-http://localhost:3001/race?grand_prix=Australia&car=Ferrari&winner=Michael Schumacher&laps=s
+http://localhost:6001/race?grand_prix=Australia&car=Ferrari&winner=Michael Schumacher&laps=s
 400 application/json; charset=utf-8
 {
     "_original": {
@@ -486,7 +486,7 @@ http://localhost:3001/race?grand_prix=Australia&car=Ferrari&winner=Michael Schum
 
 |Endpoint|Params|Description|
 |---|---|---|
-|/|   |http://localhost:3001/|
+|/|   |http://localhost:6001/|
 
 # /
 ```sh
@@ -495,7 +495,7 @@ GET /
 Check Rate Limit
 
 Example:
-http://localhost:3001/
+http://localhost:6001/
 
 Response succeed : 
 200 application/json; charset=utf-8
@@ -504,7 +504,7 @@ Response succeed :
 }
 
 Response failed :
-http://localhost:3001/
+http://localhost:6001/
 429 application/json; charset=utf-8
 Too Many Requests
 {
