@@ -6,5 +6,4 @@ RUN yarn install
 COPY . .
 RUN yarn build
 
-EXPOSE 3001
 CMD ["npm","start"]
