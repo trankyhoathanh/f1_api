@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 
 import { HealthModule } from './health/health.module';
 import { RaceModule } from './race/race.module';
+import { DriverModule } from './driver/driver.module';
 import { DatabaseModule } from './database.module';
 
 @Module({
@@ -13,7 +14,8 @@ import { DatabaseModule } from './database.module';
     ConfigModule.forRoot(),
     DatabaseModule,
     HealthModule,
-    RaceModule
+    RaceModule,
+    DriverModule
   ],
   controllers: [AppController],
   providers: [AppService]
